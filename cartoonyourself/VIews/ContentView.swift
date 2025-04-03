@@ -1,8 +1,8 @@
 //
 //  ContentView.swift
-//  cartoonyourself
+//  animeyourself
 //
-//  Created by Julian Beck on 03.04.25.
+//  Created by Julian Beck on 30.03.25.
 //
 
 import SwiftUI
