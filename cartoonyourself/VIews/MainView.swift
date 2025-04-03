@@ -16,9 +16,9 @@ struct MainView: View {
                 OnboardingView()
             } else {
                 AnimeYourselfView()
-                    .fullScreenCover(isPresented: $globalViewModel.isShowingPayWall) {
-                        PayWallView()
-                    }
+//                    .fullScreenCover(isPresented: $globalViewModel.isShowingPayWall) {
+//                        PayWallView()
+//                    }
                 //alwas make dark mode
                 .preferredColorScheme(.dark)
             }

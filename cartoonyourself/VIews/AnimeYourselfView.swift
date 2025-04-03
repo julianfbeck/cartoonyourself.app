@@ -91,8 +91,12 @@ struct AnimeYourselfView: View {
                 Task {
                     if let data = try? await newValue?.loadTransferable(type: Data.self),
                        let uiImage = UIImage(data: data) {
-                        // Check if the image contains a person
+                        
+                        #if DEBUG
+                        let personDetected = true
+                        #else
                         let personDetected = await detectPerson(in: uiImage)
+                        #endif
                         
                         await MainActor.run {
                             if personDetected {

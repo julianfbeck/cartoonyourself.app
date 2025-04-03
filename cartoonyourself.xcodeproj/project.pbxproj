@@ -6,6 +6,12 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		9A0DB1DD2D9F122500696103 /* RevenueCat in Frameworks */ = {isa = PBXBuildFile; productRef = 9A0DB1DC2D9F122500696103 /* RevenueCat */; };
+		9A0DB1DF2D9F122500696103 /* RevenueCatUI in Frameworks */ = {isa = PBXBuildFile; productRef = 9A0DB1DE2D9F122500696103 /* RevenueCatUI */; };
+		9A0DB1E22D9F123000696103 /* ConfettiSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 9A0DB1E12D9F123000696103 /* ConfettiSwiftUI */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		9A0DB1572D9F0DF000696103 /* cartoonyourself.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = cartoonyourself.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -23,6 +29,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9A0DB1E22D9F123000696103 /* ConfettiSwiftUI in Frameworks */,
+				9A0DB1DF2D9F122500696103 /* RevenueCatUI in Frameworks */,
+				9A0DB1DD2D9F122500696103 /* RevenueCat in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -65,6 +74,9 @@
 			);
 			name = cartoonyourself;
 			packageProductDependencies = (
+				9A0DB1DC2D9F122500696103 /* RevenueCat */,
+				9A0DB1DE2D9F122500696103 /* RevenueCatUI */,
+				9A0DB1E12D9F123000696103 /* ConfettiSwiftUI */,
 			);
 			productName = cartoonyourself;
 			productReference = 9A0DB1572D9F0DF000696103 /* cartoonyourself.app */;
@@ -94,6 +106,10 @@
 			);
 			mainGroup = 9A0DB14E2D9F0DF000696103;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				9A0DB1DB2D9F122500696103 /* XCRemoteSwiftPackageReference "purchases-ios" */,
+				9A0DB1E02D9F123000696103 /* XCRemoteSwiftPackageReference "ConfettiSwiftUI" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 9A0DB1582D9F0DF000696103 /* Products */;
 			projectDirPath = "";
@@ -324,6 +340,43 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		9A0DB1DB2D9F122500696103 /* XCRemoteSwiftPackageReference "purchases-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/RevenueCat/purchases-ios.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.20.3;
+			};
+		};
+		9A0DB1E02D9F123000696103 /* XCRemoteSwiftPackageReference "ConfettiSwiftUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/simibac/ConfettiSwiftUI.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.2;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		9A0DB1DC2D9F122500696103 /* RevenueCat */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9A0DB1DB2D9F122500696103 /* XCRemoteSwiftPackageReference "purchases-ios" */;
+			productName = RevenueCat;
+		};
+		9A0DB1DE2D9F122500696103 /* RevenueCatUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9A0DB1DB2D9F122500696103 /* XCRemoteSwiftPackageReference "purchases-ios" */;
+			productName = RevenueCatUI;
+		};
+		9A0DB1E12D9F123000696103 /* ConfettiSwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9A0DB1E02D9F123000696103 /* XCRemoteSwiftPackageReference "ConfettiSwiftUI" */;
+			productName = ConfettiSwiftUI;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 9A0DB14F2D9F0DF000696103 /* Project object */;
 }
