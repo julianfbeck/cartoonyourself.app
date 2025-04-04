@@ -122,33 +122,11 @@ struct AnimeYourselfView: View {
     }
     
     private var headerView: some View {
-        VStack(spacing: 12) {
-            Text("Toonzy")
-                .font(.system(.largeTitle, design: .rounded, weight: .bold))
-                .foregroundColor(.white)
-            
-            Text("Cartoon Yourself")
-                .font(.system(.headline, design: .rounded))
-                .foregroundColor(.white)
-                .padding(.horizontal, 16)
-                .padding(.vertical, 6)
-                .background(
-                    Capsule()
-                        .fill(Color.white.opacity(0.2))
-                        .shadow(color: .black.opacity(0.1), radius: 1, x: 0, y: 1)
-                )
-        }
-        .padding(.vertical, 20)
-        .frame(maxWidth: .infinity)
-        .background(
-            LinearGradient(
-                gradient: Gradient(colors: [Color.accentColor, Color(#colorLiteral(red: 0.2, green: 0.6, blue: 0.8, alpha: 1))]),
-                startPoint: .topLeading,
-                endPoint: .bottomTrailing
-            )
-        )
+        Image("banner")
+            .resizable()
+            .scaledToFit()
+            .frame(maxWidth: .infinity)
         .cornerRadius(20)
-        .padding(.horizontal)
     }
     
     private var imageSelectionView: some View {
