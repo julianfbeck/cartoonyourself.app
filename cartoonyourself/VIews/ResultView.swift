@@ -378,8 +378,6 @@ struct ResultView: View {
                                         .padding(.horizontal)
                                 }
                                 .padding()
-                                .background(.ultraThinMaterial)
-                                .cornerRadius(16)
                                 
                                 HStack(spacing: 16) {
                                     Button {
@@ -401,14 +399,14 @@ struct ResultView: View {
                                     } label: {
                                         HStack {
                                             Image(systemName: "arrow.clockwise")
-                                            Text(retryCount >= 6 ? "Retry Limit Reached" : "Free Retry")
+                                            Text(retryCount >= 6 ? "Limit Reached" : "Free Retry")
                                         }
                                         .font(.system(.body, design: .rounded, weight: .medium))
                                         .frame(maxWidth: .infinity)
                                         .padding(.vertical, 16)
                                         .background(
                                             RoundedRectangle(cornerRadius: 25)
-                                                .fill(retryCount >= 6 ? Color.gray : Color.purple)
+                                                .fill(retryCount >= 6 ? Color.gray : Color.accentColor)
                                         )
                                         .foregroundColor(.white)
                                     }
@@ -433,12 +431,6 @@ struct ResultView: View {
                                     }
                                 }
                             }
-                            .padding(24)
-                            .frame(maxWidth: .infinity)
-                            .background(
-                                RoundedRectangle(cornerRadius: 16)
-                                    .fill(Color.black.opacity(0.95))
-                            )
                             .padding()
                         }
                     }

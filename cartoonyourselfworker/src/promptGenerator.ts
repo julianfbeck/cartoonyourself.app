@@ -281,6 +281,52 @@ const STYLES: Record<string, StyleConfig> = {
 </prompt>
 `
   },
+  "avatar-08": {
+    styleID: "avatar-08",
+    name: "Avatar Style",
+    prompt: "transform this into an animation style similar to Avatar: The Last Airbender with expressive characters and Asian-influenced designs. ITS IMPORTANT TO ONLY ADD CHARACTERS THAT ARE IN THE ORIGINAL IMAGE. NO COPYRIGHTED CHARACTERS!",
+    styleJson: `<prompt>
+  <style>Avatar: The Last Airbender animation</style>
+  <characters>
+    <description>Original characters with the distinctive Avatar series aesthetic</description>
+    <features>
+      <face>Expressive with anime influence but Western cartoon proportions</face>
+      <eyes>Almond-shaped, larger than realistic but not overly exaggerated</eyes>
+      <noses>Small, often just a simple line or subtle triangle</noses>
+      <mouths>Highly expressive, capable of exaggerated emotions</mouths>
+      <body>Athletic, slightly stylized proportions with defined musculature</body>
+      <hands>Detailed with five fingers, more realistic than many cartoons</hands>
+    </features>
+    <expressions>Dynamic range from subtle to highly exaggerated</expressions>
+    <clothing>
+      <style>Asian-influenced designs with detailed cultural elements</style>
+      <colors>Natural earth tones with occasional vibrant accent colors</colors>
+      <details>Distinctive patterns and cultural motifs</details>
+    </clothing>
+    <movement>Fluid, martial-arts inspired poses with dynamic action lines</movement>
+  </characters>
+  <artStyle>
+    <technique>2D animation with clean linework and subtle shading</technique>
+    <colors>Rich, natural palette with environmental color theory</colors>
+    <linework>Clean, precise outlines with varied weight for emphasis</linework>
+    <shading>Subtle cel-shading with limited gradients</shading>
+    <influences>Blend of anime and Western animation techniques</influences>
+  </artStyle>
+  <background>
+    <importance>Minimal but with cultural Asian-inspired elements</importance>
+    <elements>Simplified natural environments or architectural details</elements>
+    <style>Painterly backgrounds with more detail than characters</style>
+  </background>
+  <elemental>
+    <effects>Optional subtle suggestion of elemental powers (air, water, earth, fire)</effects>
+    <style>Flowing, dynamic energy without specific bending forms</style>
+  </elemental>
+  <restrictions>
+    <avoid>Adding additional Characters that are not in the original image</avoid>
+  </restrictions>
+</prompt>
+`
+  },
   // Additional styles to be added later:
   // "cyberpunk-anime-003"
   // "chibi-kawaii-004"

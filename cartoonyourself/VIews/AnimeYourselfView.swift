@@ -27,16 +27,8 @@ struct AnimeYourselfView: View {
         "disney-04",
         "ghibli-05",
         "modern-anime-06",
-        "simpsons-07"
-//        "ghibli-inspired-002",
-//        "cyberpunk-anime-003",
-//        "chibi-kawaii-004",
-//        "shonen-dynamic-005",
-//        "shoujo-soft-006",
-//        "onepiece-007",
-//        "dragonball-008",
-//        "naruto-009",
-//        "titan-dark-010"
+        "simpsons-07",
+        "avatar-08",
     ]
     
     var body: some View {
