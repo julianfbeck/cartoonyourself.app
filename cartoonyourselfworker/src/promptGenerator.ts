@@ -84,7 +84,7 @@ const STYLES: Record<string, StyleConfig> = {
   "cartoon-03": {
     styleID: "cartoon-03",
     name: "Family Guy Style",
-    prompt: "transform this into a 2D cartoon animation style similar to Family Guy with exaggerated characters and simple coloring. Only add characters that are in the original image.",
+    prompt: "transform this into a 2D cartoon animation style similar to Family Guy. ITS IMPORTANT TO ONLY ADD CHARACTERS THAT ARE IN THE ORIGINAL IMAGE. NO COPYRIGHTED CHARACTERS!",
     styleJson: `<prompt>
   <style>Family Guy animation</style>
   <characters>
@@ -114,8 +114,6 @@ const STYLES: Record<string, StyleConfig> = {
   </background>
   <restrictions>
     <avoid>Any copyrighted Family Guy characters or specific locations</avoid>
-    <avoid>Complex textures or realistic rendering</avoid>
-    <avoid>Detailed backgrounds or environments</avoid>
     <avoid>Adding additional Characters that are not in the original image</avoid>
   </restrictions>
 </prompt>

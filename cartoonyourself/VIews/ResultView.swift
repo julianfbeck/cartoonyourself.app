@@ -401,7 +401,7 @@ struct ResultView: View {
                                     } label: {
                                         HStack {
                                             Image(systemName: "arrow.clockwise")
-                                            Text(retryCount >= 6 ? "Retry Limit Reached" : "Free Retry (\(6 - retryCount) left)")
+                                            Text(retryCount >= 6 ? "Retry Limit Reached" : "Free Retry")
                                         }
                                         .font(.system(.body, design: .rounded, weight: .medium))
                                         .frame(maxWidth: .infinity)
