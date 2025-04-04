@@ -78,6 +78,9 @@ class GlobalViewModel: ObservableObject {
                 let isProActive = customerInfo?.entitlements["PRO"]?.isActive == true
                 UserDefaults.standard.set(isProActive, forKey: "isPro")
                 self?.isPro = isProActive
+                #if DEBUG
+                self?.isPro = true
+                #endif
             }
         }
     }

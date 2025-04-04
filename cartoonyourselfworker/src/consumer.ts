@@ -1,6 +1,5 @@
 import { Redis } from '@upstash/redis/cloudflare'
 import { generatePrompt } from './promptGenerator';
-import { createOpenAIService } from './openaiService';
 import { createGeminiService } from './geminiService';
 
 interface QueueMessage {
@@ -17,7 +16,7 @@ interface QueueMessage {
 export interface Env {
 	// Define the R2 bucket binding
 	IMAGES: R2Bucket;
-	// OpenAI API key for image analysis
+	// OpenAI API key for image analysis (kept for backward compatibility)
 	OPENAI_API_KEY: string;
 	// Gemini API key for image processing
 	GOOGLE_API_KEY: string;
@@ -51,20 +50,15 @@ export async function processQueue(batch: MessageBatch<QueueMessage>, env: Env):
 			// Get the image data as an ArrayBuffer
 			const imageData = await imageObject.arrayBuffer();
 
-			// Create OpenAI service for image analysis
-			const openAIService = createOpenAIService(env.OPENAI_API_KEY);
+			// Create Gemini service for both image analysis and generation
+			const geminiService = createGeminiService(env.GOOGLE_API_KEY);
 
-			// Analyze the image to get its context
-			console.log(`Analyzing image for request ${message.body.requestId}...`);
-			const imageContext = await openAIService.analyzeImage(imageData);
-			console.log(`Image analysis result: ${imageContext.substring(0, 100)}...`);
+			// Analyze the image using Gemini
+			const imageContext = await geminiService.analyzeImage(imageData, message.body.image.mime_type);
+			console.log(imageContext);
 
 			// Generate the appropriate prompt based on styleID and image context
 			const prompt = generatePrompt(message.body.styleID, imageContext);
-			console.log(`Using prompt: ${prompt.substring(0, 100)}...`);
-
-			// Create Gemini service for image processing use random api key
-			const geminiService = createGeminiService(env.GOOGLE_API_KEY);
 
 			// Process the image with Gemini
 			console.log('Processing image with Gemini...');
@@ -73,6 +67,7 @@ export async function processQueue(batch: MessageBatch<QueueMessage>, env: Env):
 				message.body.image.mime_type,
 				prompt
 			);
+
 			// Store the processed image in R2
 			const processedImageKey = `processed/${message.body.requestId}.png`;
 			await env.IMAGES.put(processedImageKey, processedImageData, {

@@ -21,7 +21,9 @@ struct AnimeYourselfView: View {
     
     // List of anime styles matching the IDs in the AnimeViewModel
     let animeStyles = [
-        "anime-default-001",
+        "flat-01",
+        "3d-animation-02",
+        "cartoon-03",
 //        "ghibli-inspired-002",
 //        "cyberpunk-anime-003",
 //        "chibi-kawaii-004",

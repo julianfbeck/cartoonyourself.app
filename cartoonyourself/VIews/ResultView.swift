@@ -1,10 +1,3 @@
-//
-//  ResultView.swift
-//  animeyourself
-//
-//  Created by Julian Beck on 30.03.25.
-//
-
 import SwiftUI
 import ConfettiSwiftUI
 import UIKit
@@ -24,6 +17,7 @@ struct ResultView: View {
     @State private var timer: Timer? = nil
     @State private var viewBounds: CGRect = .zero
     @State private var retryCount = 0
+    @State private var showActionsButtons = false
     
     var body: some View {
         ZStack {
@@ -62,7 +56,7 @@ struct ResultView: View {
                     Spacer()
                     
                     Button {
-                        if retryCount < 3 {
+                        if retryCount < 6 {
                             retryCount += 1
                             
                             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
@@ -80,8 +74,8 @@ struct ResultView: View {
                             .font(.system(size: 24, weight: .semibold))
                             .foregroundColor(.white)
                     }
-                    .disabled(model.isProcessing || model.selectedImage == nil || retryCount >= 3)
-                    .opacity((model.isProcessing || model.selectedImage == nil || retryCount >= 3) ? 0.5 : 1)
+                    .disabled(model.isProcessing || model.selectedImage == nil || retryCount >= 6)
+                    .opacity((model.isProcessing || model.selectedImage == nil || retryCount >= 6) ? 0.5 : 1)
                 }
                 .padding(.horizontal)
                 .padding(.top, 20)
@@ -142,7 +136,6 @@ struct ResultView: View {
                         // Result State
                         else if let processedImage = model.processedImage {
                             ZStack {
-                                
                                 Image(uiImage: processedImage)
                                     .resizable()
                                     .cornerRadius(16)
@@ -177,7 +170,6 @@ struct ResultView: View {
                                 }
                             }
                             
-
                             // Pro banner
                             if !globalViewModel.isPro {
                                 Text("Upgrade to Remove Watermarks")
@@ -186,64 +178,59 @@ struct ResultView: View {
                                     .padding(.vertical, 8)
                             }
 
-                            // Action buttons
-                            HStack(spacing: 15) {
-                                if globalViewModel.isPro {
-                                    // Direct save button for Pro users (without branding)
+                            if !showActionsButtons {
+                                // Like/Try Again buttons
+                                HStack(spacing: 15) {
+                                    // Like the Design button (matched with Save button style)
                                     ActionButton(
-                                        title: "Save Original",
-                                        icon: "square.and.arrow.down",
+                                        title: "Like the Design",
+                                        icon: "heart.fill",
                                         backgroundColor: Color.accentColor
                                     ) {
-                                        if let processedImage = model.processedImage {
-                                            // Save the original processed image without branding
-                                            UIImageWriteToSavedPhotosAlbum(processedImage, nil, nil, nil)
-                                            
-                                            // Give haptic feedback
-                                            let generator = UINotificationFeedbackGenerator()
-                                            generator.notificationOccurred(.success)
-                                            
-                                            // Show saved notification
-                                            withAnimation {
-                                                showSavedNotification = true
-                                            }
-                                            
-                                            // Hide notification after 2 seconds
-                                            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                                                withAnimation {
-                                                    showSavedNotification = false
-                                                }
-                                            }
+                                        withAnimation {
+                                            showActionsButtons = true
                                         }
+                                        // Give haptic feedback
+                                        let generator = UIImpactFeedbackGenerator(style: .medium)
+                                        generator.impactOccurred()
                                     }
                                     
-                                    // Direct share button for Pro users (without branding)
+                                    // Try Again button (matched with Share button style)
                                     ActionButton(
-                                        title: "Share Original",
-                                        icon: "square.and.arrow.up",
+                                        title: "Free Retry (\(6 - retryCount) left)",
+                                        icon: "arrow.clockwise",
                                         backgroundColor: Color.black.opacity(0.4),
                                         action: {
-                                            if let processedImage = model.processedImage {
-                                                // Show standard share sheet with the original image
-                                                model.brandedShareImage = processedImage
-                                                showShareSheet = true
-                                            }
-                                        }, showBorder: true)
-                                } else {
-                                    // Save button with branding for non-Pro users
-                                    ActionButton(
-                                        title: "Save",
-                                        icon: "square.and.arrow.down",
-                                        backgroundColor: Color.accentColor
-                                    ) {
-                                        if let processedImage = model.processedImage {
-                                            // Generate the branded share image
-                                            if let brandedImage = shareModel.generateSharePreview(originalImage: processedImage) {
-                                                // Save the branded image to photos
-                                                UIImageWriteToSavedPhotosAlbum(brandedImage, nil, nil, nil)
+                                            if retryCount < 6 {
+                                                retryCount += 1
                                                 
-                                                // Show saved notification and track the event
-                                                shareModel.trackImageSaved()
+                                                if let image = model.selectedImage {
+                                                    model.processImage(image, style: model.selectedStyle)
+                                                }
+                                                
+                                                // Give haptic feedback
+                                                let generator = UIImpactFeedbackGenerator(style: .medium)
+                                                generator.impactOccurred()
+                                            }
+                                        },
+                                        showBorder: true
+                                    )
+                                    .disabled(retryCount >= 6)
+                                    .opacity(retryCount >= 6 ? 0.5 : 1)
+                                }
+                            } else {
+                                // Save and Share buttons (shown after user likes the design)
+                                HStack(spacing: 15) {
+                                    if globalViewModel.isPro {
+                                        // Direct save button for Pro users (without branding)
+                                        ActionButton(
+                                            title: "Save Original",
+                                            icon: "square.and.arrow.down",
+                                            backgroundColor: Color.accentColor
+                                        ) {
+                                            if let processedImage = model.processedImage {
+                                                // Save the original processed image without branding
+                                                UIImageWriteToSavedPhotosAlbum(processedImage, nil, nil, nil)
                                                 
                                                 // Give haptic feedback
                                                 let generator = UINotificationFeedbackGenerator()
@@ -262,32 +249,79 @@ struct ResultView: View {
                                                 }
                                             }
                                         }
-                                    }
-                                    
-                                    // Share button with branding for non-Pro users
-                                    ActionButton(
-                                        title: "Share",
-                                        icon: "square.and.arrow.up",
-                                        backgroundColor: Color.black.opacity(0.4),
-                                        action: {
+                                        
+                                        // Direct share button for Pro users (without branding)
+                                        ActionButton(
+                                            title: "Share Original",
+                                            icon: "square.and.arrow.up",
+                                            backgroundColor: Color.black.opacity(0.4),
+                                            action: {
+                                                if let processedImage = model.processedImage {
+                                                    // Show standard share sheet with the original image
+                                                    model.brandedShareImage = processedImage
+                                                    showShareSheet = true
+                                                }
+                                            }, showBorder: true)
+                                    } else {
+                                        // Save button with branding for non-Pro users
+                                        ActionButton(
+                                            title: "Save",
+                                            icon: "square.and.arrow.down",
+                                            backgroundColor: Color.accentColor
+                                        ) {
                                             if let processedImage = model.processedImage {
                                                 // Generate the branded share image
                                                 if let brandedImage = shareModel.generateSharePreview(originalImage: processedImage) {
-                                                    // Track the share event
-                                                    shareModel.trackImageShared()
+                                                    // Save the branded image to photos
+                                                    UIImageWriteToSavedPhotosAlbum(brandedImage, nil, nil, nil)
                                                     
-                                                    // Show standard share sheet with the branded image
-                                                    showShareSheet = true
+                                                    // Show saved notification and track the event
+                                                    shareModel.trackImageSaved()
                                                     
-                                                    // Save the branded image for sharing
-                                                    model.brandedShareImage = brandedImage
+                                                    // Give haptic feedback
+                                                    let generator = UINotificationFeedbackGenerator()
+                                                    generator.notificationOccurred(.success)
+                                                    
+                                                    // Show saved notification
+                                                    withAnimation {
+                                                        showSavedNotification = true
+                                                    }
+                                                    
+                                                    // Hide notification after 2 seconds
+                                                    DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                                                        withAnimation {
+                                                            showSavedNotification = false
+                                                        }
+                                                    }
                                                 }
                                             }
-                                        }, showBorder: true)
+                                        }
+                                        
+                                        // Share button with branding for non-Pro users
+                                        ActionButton(
+                                            title: "Share",
+                                            icon: "square.and.arrow.up",
+                                            backgroundColor: Color.black.opacity(0.4),
+                                            action: {
+                                                if let processedImage = model.processedImage {
+                                                    // Generate the branded share image
+                                                    if let brandedImage = shareModel.generateSharePreview(originalImage: processedImage) {
+                                                        // Track the share event
+                                                        shareModel.trackImageShared()
+                                                        
+                                                        // Show standard share sheet with the branded image
+                                                        showShareSheet = true
+                                                        
+                                                        // Save the branded image for sharing
+                                                        model.brandedShareImage = brandedImage
+                                                    }
+                                                }
+                                            }, showBorder: true)
+                                    }
                                 }
                             }
                             
-                            // Try another style button
+                            // Try another style button (always visible)
                             Button {
                                 presentationMode.wrappedValue.dismiss()
                             } label: {
@@ -349,10 +383,9 @@ struct ResultView: View {
                                 
                                 HStack(spacing: 16) {
                                     Button {
-                                        if retryCount < 3 {
+                                        if retryCount < 6 {
                                             retryCount += 1
                                             self.globalViewModel.usageCount -= 1
-                                     
                                             
                                             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                                                 if !globalViewModel.isPro {
@@ -368,18 +401,18 @@ struct ResultView: View {
                                     } label: {
                                         HStack {
                                             Image(systemName: "arrow.clockwise")
-                                            Text(retryCount >= 3 ? "Retry Limit Reached" : "Free Retry")
+                                            Text(retryCount >= 6 ? "Retry Limit Reached" : "Free Retry (\(6 - retryCount) left)")
                                         }
                                         .font(.system(.body, design: .rounded, weight: .medium))
                                         .frame(maxWidth: .infinity)
                                         .padding(.vertical, 16)
                                         .background(
                                             RoundedRectangle(cornerRadius: 25)
-                                                .fill(retryCount >= 3 ? Color.gray : Color.purple)
+                                                .fill(retryCount >= 6 ? Color.gray : Color.purple)
                                         )
                                         .foregroundColor(.white)
                                     }
-                                    .disabled(retryCount >= 3)
+                                    .disabled(retryCount >= 6)
                                     
                                     Button {
                                         model.clearImages()
@@ -454,6 +487,8 @@ struct ResultView: View {
             if model.isProcessing {
                 startRippleEffect()
             }
+            // Reset the showActionsButtons state when the view appears
+            showActionsButtons = false
         }
         .onDisappear {
             // Clean up the timer when view disappears
