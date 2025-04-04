@@ -119,6 +119,168 @@ const STYLES: Record<string, StyleConfig> = {
 </prompt>
 `
   },
+  "disney-04": {
+    styleID: "disney-04",
+    name: "Classic Disney",
+    prompt: "transform this into a traditional hand-drawn animation style similar to classic Disney. ITS IMPORTANT TO ONLY ADD CHARACTERS THAT ARE IN THE ORIGINAL IMAGE. NO COPYRIGHTED CHARACTERS!",
+    styleJson: `<prompt>
+  <style>Classic Disney animation</style>
+  <characters>
+    <description>Original cartoon characters with the distinct classic Disney aesthetic</description>
+    <features>
+      <head>Round, appealing with large expressive eyes</head>
+      <body>Fluid, graceful proportions with natural movement</body>
+      <eyes>Large, expressive with detailed irises and eyelashes</eyes>
+      <faces>Soft, appealing features with emphasized expressions</faces>
+      <proportions>Slightly stylized but anatomically believable</proportions>
+      <movement>Flowing, smooth with exaggerated squash and stretch</movement>
+    </features>
+    <expressions>Warm, emotive with a full range of emotions</expressions>
+    <clothing>Detailed period-appropriate attire with natural folds and movement</clothing>
+  </characters>
+  <artStyle>
+    <technique>Traditional hand-drawn animation appearance</technique>
+    <colors>Rich, watercolor-inspired palette with soft transitions</colors>
+    <linework>Clean, confident ink lines with varying thickness</linework>
+    <animation>Fluid, graceful movements with the 12 principles of animation</animation>
+    <shading>Soft gradient shadows with ambient occlusion</shading>
+  </artStyle>
+  <background>
+    <importance>Minimal, simple supporting elements</importance>
+    <elements>Suggested painterly environment with atmospheric perspective</elements>
+    <style>Watercolor-inspired with soft edges and color harmony</style>
+  </background>
+  <restrictions>
+    <avoid>Adding additional Characters that are not in the original image</avoid>
+  </restrictions>
+</prompt>
+`
+  },
+  "ghibli-05": {
+    styleID: "ghibli-05",
+    name: "Studio Ghibli",
+    prompt: "transform this into a hand-painted animation style similar to Studio Ghibli films. ITS IMPORTANT TO ONLY ADD CHARACTERS THAT ARE IN THE ORIGINAL IMAGE. NO COPYRIGHTED CHARACTERS!",
+    styleJson: `<prompt>
+  <style>Studio Ghibli animation</style>
+  <characters>
+    <description>Original characters with the distinctive Ghibli aesthetic</description>
+    <features>
+      <face>Rounded with simple but expressive features, soft lines</face>
+      <eyes>Large, detailed eyes with defined highlights and reflections</eyes>
+      <hair>Flowing, detailed with individual strands but not over-rendered</hair>
+      <body>Naturalistic proportions with slight stylization</body>
+      <movement>Fluid, graceful with attention to weight and physics</movement>
+    </features>
+    <expressions>Subtle, nuanced emotional range with attention to micro-expressions</expressions>
+    <clothing>Detailed fabrics with natural draping, often flowing in the wind</clothing>
+  </characters>
+  <artStyle>
+    <technique>Hand-drawn appearance with watercolor-like textures</technique>
+    <colors>Soft, natural palette with emphasis on greens, blues and earth tones</colors>
+    <linework>Delicate, varied line weight with hand-painted appearance</linework>
+    <lighting>Soft, diffused with attention to atmospheric perspective</lighting>
+    <textures>Subtle watercolor washes and painterly details</textures>
+  </artStyle>
+  <background>
+    <importance>Minimal but evocative natural elements</importance>
+    <elements>Hints of nature such as grass, clouds, or foliage</elements>
+    <style>Impressionistic, painterly with attention to natural beauty</style>
+    <atmosphere>Ethereal quality with sense of depth and air</atmosphere>
+  </background>
+  <mood>
+    <feeling>Peaceful, contemplative, nostalgic</feeling>
+    <atmosphere>Sense of wonder and connection to nature</atmosphere>
+  </mood>
+  <restrictions>
+    <avoid>Adding additional Characters that are not in the original image</avoid>
+  </restrictions>
+</prompt>
+`
+  },
+  "modern-anime-06": {
+    styleID: "modern-anime-06",
+    name: "Modern Anime",
+    prompt: "transform this into a contemporary high-quality anime style with detailed characters. ITS IMPORTANT TO ONLY ADD CHARACTERS THAT ARE IN THE ORIGINAL IMAGE. NO COPYRIGHTED CHARACTERS!",
+    styleJson: `<prompt>
+  <style>Modern Anime</style>
+  <characters>
+    <description>Original characters with contemporary anime aesthetic</description>
+    <features>
+      <face>Angular jawlines with defined features, balance of realism and stylization</face>
+      <eyes>Large, highly detailed with multiple highlights, reflections, and color gradients</eyes>
+      <hair>Voluminous with complex coloring, shading, and individual strand detail</hair>
+      <body>Realistic proportions with slight stylization, detailed anatomy</body>
+      <skin>Smooth with subtle shading and occasional blush effects</skin>
+    </features>
+    <expressions>Dynamic and emotionally intense with exaggerated reaction potential</expressions>
+    <clothing>
+      <detail>High detail with realistic folds, textures, and material properties</detail>
+      <style>Contemporary fashion with intricate accessories and layering</style>
+      <shading>Multiple light sources with proper shadowing and material reflection</shading>
+    </clothing>
+  </characters>
+  <artStyle>
+    <technique>Digital painting with crisp linework and detailed coloring</technique>
+    <colors>Vibrant palette with high contrast and color theory application</colors>
+    <linework>Clean, varied weight lines with selective emphasis</linework>
+    <shading>Cel-shading with additional gradient work for depth</shading>
+    <effects>Selective bloom, lens flares, and particle effects</effects>
+    <composition>Dynamic camera angles and perspective</composition>
+  </artStyle>
+  <background>
+    <importance>Minimal but with atmospheric elements</importance>
+    <elements>Suggested urban or natural setting with depth cues</elements>
+    <style>Blurred or simplified detail to focus on characters</style>
+    <lighting>Dramatic lighting with emphasis on character illumination</lighting>
+  </background>
+  <postProcessing>
+    <effects>Subtle color grading, vignetting, and atmospheric effects</effects>
+    <quality>High resolution with clean anti-aliasing</quality>
+  </postProcessing>
+  <restrictions>
+    <avoid>Adding additional Characters that are not in the original image</avoid>
+  </restrictions>
+</prompt>
+`
+  },
+  "simpsons-07": {
+    styleID: "simpsons-07",
+    name: "The Simpsons Style",
+    prompt: "transform this into a 2D cartoon animation style similar to The Simpsons with bright yellow skin and bold outlines. ITS IMPORTANT TO ONLY ADD CHARACTERS THAT ARE IN THE ORIGINAL IMAGE. NO COPYRIGHTED CHARACTERS!",
+    styleJson: `<prompt>
+  <style>The Simpsons animation</style>
+  <characters>
+    <description>Original cartoon characters with the distinctive Simpsons aesthetic</description>
+    <features>
+      <skin>Bright yellow (or other vivid colors for non-human characters)</skin>
+      <eyes>Large, round white eyes with black pupils</eyes>
+      <head>Overbite with prominent upper lip, large circular head</head>
+      <hair>Simple shapes with solid colors, often spiky or distinctive silhouettes</hair>
+      <body>Four fingers on each hand, simplified anatomy</body>
+      <proportions>Exaggerated head-to-body ratio, simplified limbs</proportions>
+    </features>
+    <expressions>Highly elastic faces capable of extreme expressions</expressions>
+    <clothing>Simple, flat colored outfits with minimal detail and consistent colors</clothing>
+  </characters>
+  <artStyle>
+    <technique>2D animation with bold outlines and flat coloring</technique>
+    <colors>Vibrant, highly saturated colors with no gradients</colors>
+    <linework>Thick, consistent black outlines for all elements</linework>
+    <animation>Somewhat limited range of motion if animated</animation>
+    <style>Clean, cartoonish with absolutely no textures</style>
+  </artStyle>
+  <background>
+    <importance>Minimal, simplified background elements only</importance>
+    <elements>Basic interiors or simple outdoor scenes with flat colors</elements>
+    <style>Flat, solid color blocks with minimal detail or shading</style>
+    <perspective>Simple perspective with minimal depth</perspective>
+  </background>
+  <restrictions>
+    <avoid>Adding additional Characters that are not in the original image</avoid>
+  </restrictions>
+</prompt>
+`
+  },
   // Additional styles to be added later:
   // "cyberpunk-anime-003"
   // "chibi-kawaii-004"
