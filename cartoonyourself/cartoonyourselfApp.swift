@@ -14,7 +14,7 @@ struct cartoonyourselfApp: App {
     @StateObject var wmrm = AnimeViewModel()
     
     init() {
-        Purchases.configure(withAPIKey: "appl_xIhJySLYOoywhePdUmVaSAnaZ")
+        Purchases.configure(withAPIKey: "appl_uNCJMumEwDiUOanfbNiwvbDrJMP")
     }
     
     var body: some Scene {
@@ -24,7 +24,7 @@ struct cartoonyourselfApp: App {
                 .environmentObject(wmrm)
                 
                 .onAppear {
-                    Plausible.shared.configure(domain: "anime.juli.sh", endpoint: "https://stats.juli.sh/api/event")
+                    Plausible.shared.configure(domain: "cartoon.juli.sh", endpoint: "https://stats.juli.sh/api/event")
                 }
         }
     }

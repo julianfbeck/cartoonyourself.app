@@ -94,7 +94,7 @@ struct SecondOnboardingScreen: View {
                     .fontWeight(.semibold)
                     .multilineTextAlignment(.center)
                 
-                Text("Experience the magic of AI-powered anime transformations with multiple unique styles to choose from.")
+                Text("Experience the magic of AI-powered cartoon transformations with multiple unique styles to choose from.")
                     .font(.body)
                     .multilineTextAlignment(.center)
                     .padding(.horizontal)

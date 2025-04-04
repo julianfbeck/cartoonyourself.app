@@ -26,10 +26,10 @@ struct FirstOnboardingScreen: View {
         VStack(spacing: 24) {
             // App logo and title
             VStack(spacing: 16) {
-                Text("AniFy")
+                Text("Toonzy")
                     .font(.system(size: 42, weight: .bold))
                 
-                Text("Transform Yourself Into Anime")
+                Text("Transform Yourself Into Cartoon")
                     .font(.title3)
                     .multilineTextAlignment(.center)
                     .foregroundColor(.secondary)
@@ -88,12 +88,12 @@ struct FirstOnboardingScreen: View {
             
             // Features section
             VStack(alignment: .leading, spacing: 20) {
-                Text("Transform any photo into anime art")
+                Text("Transform any photo into cartoon Art")
                     .font(.title2)
                     .fontWeight(.bold)
                     .padding(.horizontal)
                 
-                Text("Experience the magic of AI-powered anime transformations with multiple unique styles to choose from.")
+                Text("Experience the magic of AI-powered cartoon transformations with multiple unique styles to choose from.")
                     .font(.body)
                     .foregroundColor(.secondary)
                     .multilineTextAlignment(.center)

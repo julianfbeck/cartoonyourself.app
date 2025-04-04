@@ -113,9 +113,9 @@ struct PayWallView: View {
                     
                     // Features list
                     VStack(alignment: .leading, spacing: 20) {
-                        FeatureRow(icon: "infinity.circle.fill", text: "Unlimited transformations")
+                        FeatureRow(icon: "infinity.circle.fill", text: "Remove Watermarks")
                         FeatureRow(icon: "bolt.circle.fill", text: "Priority processing queue")
-                        FeatureRow(icon: "paintpalette.fill", text: "Access all anime styles")
+                        FeatureRow(icon: "paintpalette.fill", text: "Access all Styles")
                     }
                     .padding(.vertical, 16)
                     .padding(.horizontal, 8)

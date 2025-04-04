@@ -21,12 +21,12 @@ struct AnimeYourselfView: View {
     
     // List of anime styles matching the IDs in the AnimeViewModel
     let animeStyles = [
-        "flat-01",
         "3d-animation-02",
-        "cartoon-03",
-        "disney-04",
-        "ghibli-05",
         "modern-anime-06",
+        "cartoon-03",
+        "ghibli-05",
+        "flat-01",
+        "disney-04",
         "simpsons-07",
         "avatar-08",
     ]
@@ -35,7 +35,7 @@ struct AnimeYourselfView: View {
         NavigationStack {
             ZStack {
                 // Main content
-                ScrollView(showsIndicators: false) {
+                ScrollView(showsIndicators: true) {
                     VStack(spacing: 30) {
                         headerView
                         imageSelectionView
@@ -90,11 +90,11 @@ struct AnimeYourselfView: View {
                     if let data = try? await newValue?.loadTransferable(type: Data.self),
                        let uiImage = UIImage(data: data) {
                         
-                        #if DEBUG
+#if DEBUG
                         let personDetected = true
-                        #else
+#else
                         let personDetected = await detectPerson(in: uiImage)
-                        #endif
+#endif
                         
                         await MainActor.run {
                             if personDetected {
@@ -123,16 +123,32 @@ struct AnimeYourselfView: View {
     
     private var headerView: some View {
         VStack(spacing: 12) {
-            Text("Anime Yourself")
+            Text("Toonzy")
                 .font(.system(.largeTitle, design: .rounded, weight: .bold))
                 .foregroundColor(.white)
             
-            Text("Transform your photos into stunning anime art")
-                .font(.system(.subheadline, design: .rounded))
-                .multilineTextAlignment(.center)
-                .foregroundColor(.white.opacity(0.85))
+            Text("Cartoon Yourself")
+                .font(.system(.headline, design: .rounded))
+                .foregroundColor(.white)
+                .padding(.horizontal, 16)
+                .padding(.vertical, 6)
+                .background(
+                    Capsule()
+                        .fill(Color.white.opacity(0.2))
+                        .shadow(color: .black.opacity(0.1), radius: 1, x: 0, y: 1)
+                )
         }
-        .padding(.vertical, 10)
+        .padding(.vertical, 20)
+        .frame(maxWidth: .infinity)
+        .background(
+            LinearGradient(
+                gradient: Gradient(colors: [Color.accentColor, Color(#colorLiteral(red: 0.2, green: 0.6, blue: 0.8, alpha: 1))]),
+                startPoint: .topLeading,
+                endPoint: .bottomTrailing
+            )
+        )
+        .cornerRadius(20)
+        .padding(.horizontal)
     }
     
     private var imageSelectionView: some View {
@@ -146,27 +162,37 @@ struct AnimeYourselfView: View {
                     .shadow(radius: 8, x: 0, y: 4)
                     .overlay(
                         RoundedRectangle(cornerRadius: 16)
-                            .stroke(Color.white.opacity(0.4), lineWidth: 1)
+                            .stroke(Color.accentColor, lineWidth: 2)
                     )
-                
-                Text("Original Image")
-                    .font(.system(.headline, design: .rounded))
-                    .foregroundColor(.white.opacity(0.9))
                 
                 // Show anime style selection
                 VStack(alignment: .leading, spacing: 12) {
-                    Text("Choose Anime Style:")
+                    Text("Choose Cartoon / Anime Style")
                         .font(.system(.headline, design: .rounded))
                         .foregroundColor(.white.opacity(0.9))
                     
-                    ScrollView(.horizontal, showsIndicators: false) {
-                        HStack(spacing: 12) {
-                            ForEach(animeStyles, id: \.self) { style in
-                                animeStyleButton(style)
+                    VStack(alignment: .leading) {
+                        ScrollView(.horizontal, showsIndicators: true) {
+                            HStack(spacing: 12) {
+                                ForEach(animeStyles, id: \.self) { style in
+                                    animeStyleButton(style)
+                                }
                             }
+                            .padding(.horizontal, 4)
+                            .padding(.vertical, 8)
                         }
-                        .padding(.horizontal, 4)
-                        .padding(.vertical, 8)
+                        
+                        // Add scroll indicator arrows
+                        HStack {
+                            Spacer()
+                            Image(systemName: "arrow.right")
+                                .font(.system(size: 16, weight: .bold))
+                                .foregroundColor(.white.opacity(0.8))
+                            Text("Scroll for more styles")
+                                .font(.system(.caption, design: .rounded))
+                                .foregroundColor(.white.opacity(0.8))
+                        }
+                        .padding(.trailing, 8)
                     }
                 }
                 .padding(.top, 8)
@@ -176,7 +202,7 @@ struct AnimeYourselfView: View {
                     HStack(spacing: 15) {
                         Button {
                             if !self.globalViewModel.isPro && globalViewModel.remainingUses <= 0 {
-                               self.globalViewModel.isShowingPayWall = true
+                                self.globalViewModel.isShowingPayWall = true
                                 return
                             }
                             
@@ -185,7 +211,7 @@ struct AnimeYourselfView: View {
                                     globalViewModel.isShowingPayWall = true
                                 }
                             }
-                                
+                            
                             if let image = model.selectedImage {
                                 model.processImage(image, style: model.selectedStyle)
                                 globalViewModel.useFeature()
@@ -259,7 +285,7 @@ struct AnimeYourselfView: View {
                     HStack(spacing: 15) {
                         Button {
                             if !self.globalViewModel.isPro && globalViewModel.remainingUses <= 0 {
-                               self.globalViewModel.isShowingPayWall = true
+                                self.globalViewModel.isShowingPayWall = true
                                 return
                             }
                             
@@ -268,7 +294,7 @@ struct AnimeYourselfView: View {
                                     globalViewModel.isShowingPayWall = true
                                 }
                             }
-                                
+                            
                             if let image = model.selectedImage {
                                 model.processImage(image, style: model.selectedStyle)
                                 globalViewModel.useFeature()
@@ -330,7 +356,7 @@ struct AnimeYourselfView: View {
                     
                     // Show only the first feature card
                     VStack(spacing: 16) {
-                        Text("Turn Yourself Into Anime")
+                        Text("Turn Yourself Into Cartoon")
                             .font(.system(.title3, design: .rounded, weight: .bold))
                             .foregroundColor(.white)
                             .padding(.top, 8)
@@ -338,25 +364,39 @@ struct AnimeYourselfView: View {
                         // Only the first feature card
                         featureCard(
                             icon: "person.crop.rectangle.stack",
-                            title: "Anime Transformation",
-                            description: "Convert your selfies into stunning anime portraits"
+                            title: "Cartoon Transformation",
+                            description: "Convert your selfies into stunning cartoon portraits"
                         )
                     }
                     
                     // Show anime style selection
                     VStack(alignment: .leading, spacing: 12) {
-                        Text("Choose Anime Style:")
+                        Text("Choose Cartoon / Anime Style:")
                             .font(.system(.headline, design: .rounded))
                             .foregroundColor(.white.opacity(0.9))
                         
-                        ScrollView(.horizontal, showsIndicators: false) {
-                            HStack(spacing: 12) {
-                                ForEach(animeStyles, id: \.self) { style in
-                                    animeStyleButton(style)
+                        VStack(alignment: .leading) {
+                            ScrollView(.horizontal, showsIndicators: true) {
+                                HStack(spacing: 12) {
+                                    ForEach(animeStyles, id: \.self) { style in
+                                        animeStyleButton(style)
+                                    }
                                 }
+                                .padding(.horizontal, 4)
+                                .padding(.vertical, 8)
                             }
-                            .padding(.horizontal, 4)
-                            .padding(.vertical, 8)
+                            
+                            // Add scroll indicator arrows
+                            HStack {
+                                Spacer()
+                                Image(systemName: "arrow.right")
+                                    .font(.system(size: 16, weight: .bold))
+                                    .foregroundColor(.white.opacity(0.8))
+                                Text("Scroll for more styles")
+                                    .font(.system(.caption, design: .rounded))
+                                    .foregroundColor(.white.opacity(0.8))
+                            }
+                            .padding(.trailing, 8)
                         }
                     }
                     .padding(.top, 8)
@@ -377,11 +417,7 @@ struct AnimeYourselfView: View {
     
     private func animeStyleButton(_ style: String) -> some View {
         Button {
-            if style == animeStyles[0] || globalViewModel.isPro {
-                model.selectedStyle = style
-            } else {
-                globalViewModel.isShowingPayWall = true
-            }
+            model.selectedStyle = style
         } label: {
             ZStack {
                 Image(style.lowercased())
@@ -389,22 +425,12 @@ struct AnimeYourselfView: View {
                     .font(.system(size: 22))
                     .foregroundColor(.white)
                     .cornerRadius(12)
-                    .frame(width: 100, height: 110)
+                    .frame(width: 120, height: 130)
                     .overlay(
                         RoundedRectangle(cornerRadius: 12)
-                            .stroke(model.selectedStyle == style ? Color.white : Color.red.opacity(0.2), lineWidth: 2)
+                            .stroke(model.selectedStyle == style ? Color.accentColor : Color.red.opacity(0.2), lineWidth: 2.5)
                     )
                     .shadow(radius: model.selectedStyle == style ? 5 : 0)
-                
-                if style != animeStyles[0] && !globalViewModel.isPro {
-                    ZStack {
-                        Color.black.opacity(0.6)
-                        Image(systemName: "lock.fill")
-                            .font(.system(size: 30))
-                            .foregroundColor(.white)
-                    }
-                    .cornerRadius(12)
-                }
             }
         }
     }
@@ -427,14 +453,12 @@ struct AnimeYourselfView: View {
                 RoundedRectangle(cornerRadius: 16)
                     .fill(
                         LinearGradient(
-                            gradient: Gradient(colors: [
-                                Color.accentColor, 
-                                Color.accentColor.opacity(0.7)
-                            ]),
+                            gradient: Gradient(colors: [Color.accentColor, Color(#colorLiteral(red: 0.2, green: 0.6, blue: 0.8, alpha: 1))]),
                             startPoint: .topLeading,
                             endPoint: .bottomTrailing
                         )
                     )
+                
             )
             .overlay(
                 RoundedRectangle(cornerRadius: 16)
@@ -471,53 +495,6 @@ struct AnimeYourselfView: View {
         }
     }
     
-    // New feature cards view
-    private var featureCardsView: some View {
-        VStack(spacing: 16) {
-            Text("Turn Yourself Into Anime")
-                .font(.system(.title3, design: .rounded, weight: .bold))
-                .foregroundColor(.white)
-                .padding(.top, 8)
-            
-            // Feature cards
-            featureCard(
-                icon: "person.crop.rectangle.stack",
-                title: "Anime Transformation",
-                description: "Convert your selfies into stunning anime portraits"
-            )
-            
-            featureCard(
-                icon: "paintpalette",
-                title: "Multiple Styles",
-                description: "Choose from various popular anime art styles"
-            )
-            
-            featureCard(
-                icon: "arrow.triangle.2.circlepath",
-                title: "Instant Results",
-                description: "Get high-quality anime transformations in seconds"
-            )
-            
-            // Inspirational message at the bottom
-            VStack(spacing: 10) {
-                Text("Ready to see yourself in anime?")
-                    .font(.system(.headline, design: .rounded, weight: .bold))
-                    .foregroundColor(.white)
-                    .multilineTextAlignment(.center)
-                
-                Text("Select a photo above to begin your transformation")
-                    .font(.system(.subheadline, design: .rounded))
-                    .foregroundColor(.white.opacity(0.7))
-                    .multilineTextAlignment(.center)
-                
-                Image(systemName: "arrow.up")
-                    .font(.system(size: 18, weight: .bold))
-                    .foregroundColor(.accentColor)
-                    .padding(.top, 5)
-            }
-            .padding(.vertical, 20)
-        }
-    }
     
     private func featureCard(icon: String, title: String, description: String) -> some View {
         HStack(alignment: .center, spacing: 16) {

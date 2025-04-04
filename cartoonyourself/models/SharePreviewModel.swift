@@ -102,11 +102,11 @@ struct SharePreviewContent: View {
                 }
                 
                 VStack(alignment: .leading) {
-                    Text("Anify")
+                    Text("Toonzy")
                         .font(.system(size: 28, weight: .bold, design: .rounded))
                         .foregroundColor(.white)
                     
-                    Text("Anime Yourself")
+                    Text("Cartoon Yourself")
                         .font(.system(size: 16, design: .rounded))
                         .foregroundColor(.white.opacity(0.8))
                 }
