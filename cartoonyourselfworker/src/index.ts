@@ -45,7 +45,7 @@ interface QueueMessage {
 
 // Add rate limiting constants
 const RATE_LIMIT = {
-	MAX_REQUESTS: 20, // Maximum requests per window
+	MAX_REQUESTS: 35, // Maximum requests per window
 	WINDOW_SECONDS: 3600, // Time window in seconds (1 hour)
 };
 
