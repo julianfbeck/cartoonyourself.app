@@ -192,6 +192,7 @@ struct ResultView: View {
                                         withAnimation {
                                             showActionsButtons = true
                                             self.userPressedLikeButton += 1
+                                            Plausible.shared.trackPageview(path: "/like")
                                             
                                             if userPressedLikeButton == 2 || userPressedLikeButton == 12 {
                                                 DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
@@ -214,6 +215,7 @@ struct ResultView: View {
                                             if retryCount < 6 {
                                                 retryCount += 1
                                                 
+                                                Plausible.shared.trackPageview(path: "/retry")
                                                 if let image = model.selectedImage {
                                                     model.processImage(image, style: model.selectedStyle)
                                                 }

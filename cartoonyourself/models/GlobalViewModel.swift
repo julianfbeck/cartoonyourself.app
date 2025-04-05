@@ -59,11 +59,7 @@ class GlobalViewModel: ObservableObject {
         setupPurchases()
         fetchOfferings()
         #if DEBUG
-        // For testing purposes, reset usage count
         self.usageCount = 0
-        self.isPro = true
-        self.canUseForFree = true
-        self.updateProStatus(true)
         #endif
         
         if !self.isPro && !self.isShowingOnboarding && !self.isFirstLaunch {
@@ -78,9 +74,6 @@ class GlobalViewModel: ObservableObject {
                 let isProActive = customerInfo?.entitlements["PRO"]?.isActive == true
                 UserDefaults.standard.set(isProActive, forKey: "isPro")
                 self?.isPro = isProActive
-                #if DEBUG
-                self?.isPro = true
-                #endif
             }
         }
     }
@@ -90,7 +83,7 @@ class GlobalViewModel: ObservableObject {
             DispatchQueue.main.async {
                 if let error = error {
                     self?.errorMessage = error.localizedDescription
-                } else if let defaultOffering = offerings?.offering(identifier: "non_trail") {
+                } else if let defaultOffering = offerings?.offering(identifier: "default") {
                     self?.offering = defaultOffering
                 }
             }

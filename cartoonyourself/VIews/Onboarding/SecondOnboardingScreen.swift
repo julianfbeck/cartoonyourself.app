@@ -77,10 +77,11 @@ struct SecondOnboardingScreen: View {
             if animationPhase == 3 {
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(spacing: 12) {
-                        StyleExample(name: "Default", imageName: "anime-default-001")
-                        StyleExample(name: "Shonen", imageName: "shonen-dynamic-005")
-                        StyleExample(name: "One Piece", imageName: "onepiece-007")
-                        StyleExample(name: "Naruto", imageName: "naruto-009")
+                        StyleExample(name: "Default", imageName: "3d-animation-02")
+                        StyleExample(name: "Shonen", imageName: "modern-anime-06")
+                        StyleExample(name: "One Piece", imageName: "cartoon-03")
+                        StyleExample(name: "Naruto", imageName: "ghibli-05")
+                      
                     }
                     .padding(.horizontal)
                 }
@@ -196,9 +197,6 @@ struct StyleExample: View {
                         .stroke(Color.white.opacity(0.3), lineWidth: 1)
                 )
             
-            Text(name)
-                .font(.caption)
-                .foregroundColor(.white)
         }
     }
 }

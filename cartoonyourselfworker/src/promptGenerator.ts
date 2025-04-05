@@ -70,8 +70,6 @@ const STYLES: Record<string, StyleConfig> = {
     <animation>Squash and stretch principles with weight and momentum</animation>
   </artStyle>
   <background>
-    <importance>Minimal, supporting elements only</importance>
-    <elements>Suggested environment with depth but not detailed</elements>
     <lighting>Complementary to foreground characters</lighting>
   </background>
   <restrictions>
@@ -181,12 +179,6 @@ const STYLES: Record<string, StyleConfig> = {
     <lighting>Soft, diffused with attention to atmospheric perspective</lighting>
     <textures>Subtle watercolor washes and painterly details</textures>
   </artStyle>
-  <background>
-    <importance>Minimal but evocative natural elements</importance>
-    <elements>Hints of nature such as grass, clouds, or foliage</elements>
-    <style>Impressionistic, painterly with attention to natural beauty</style>
-    <atmosphere>Ethereal quality with sense of depth and air</atmosphere>
-  </background>
   <mood>
     <feeling>Peaceful, contemplative, nostalgic</feeling>
     <atmosphere>Sense of wonder and connection to nature</atmosphere>

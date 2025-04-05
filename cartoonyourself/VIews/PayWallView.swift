@@ -1,5 +1,13 @@
 //
 //  PayWallView.swift
+//  animeyourself
+//
+//  Created by Julian Beck on 31.03.25.
+//
+
+
+//
+//  PayWallView.swift
 //  watermarkremover
 //
 //  Created by Julian Beck on 23.03.25.
@@ -18,16 +26,12 @@ struct PayWallView: View {
     @State private var closeButtonProgress: CGFloat = 0.0
     private let allowCloseAfter: CGFloat = 4.0
     @State private var animateGradient = false
-    @State private var isAnnualSelected: Bool = false
+    @State private var isFreeTrialEnabled: Bool = true
     
     var calculateSavedPercentage: Int {
         let annualPrice = globalViewModel.offering?.annual?.storeProduct.pricePerYear?.doubleValue ?? 0
         let weeklyPrice = globalViewModel.offering?.weekly?.storeProduct.pricePerYear?.doubleValue ?? 0
         return Int((100 - ((annualPrice / weeklyPrice) * 100)).rounded())
-    }
-    
-    var hasFreeTrial: Bool {
-        return globalViewModel.offering?.weekly?.storeProduct.introductoryDiscount != nil
     }
     
     var body: some View {
@@ -105,9 +109,9 @@ struct PayWallView: View {
                     
                     // Features list
                     VStack(alignment: .leading, spacing: 20) {
-                        FeatureRow(icon: "infinity.circle.fill", text: "Remove Watermarks")
+                        FeatureRow(icon: "infinity.circle.fill", text: "Unlimited transformations")
                         FeatureRow(icon: "bolt.circle.fill", text: "Priority processing queue")
-                        FeatureRow(icon: "paintpalette.fill", text: "Access all Styles")
+                        FeatureRow(icon: "paintpalette.fill", text: "Access all anime styles")
                     }
                     .padding(.vertical, 16)
                     .padding(.horizontal, 8)
@@ -127,7 +131,7 @@ struct PayWallView: View {
                         
                         VStack(spacing: 12) {
                             // Annual option
-                            Button(action: { isAnnualSelected = true }) {
+                            Button(action: { isFreeTrialEnabled = false }) {
                                 HStack {
                                     VStack(alignment: .leading, spacing: 4) {
                                         Text("Premium Annual")
@@ -158,11 +162,11 @@ struct PayWallView: View {
                                         .shadow(color: .black.opacity(0.2), radius: 2, x: 0, y: 1)
                                     
                                     Circle()
-                                        .stroke(isAnnualSelected ? Color.white : Color.white.opacity(0.3), lineWidth: 2)
+                                        .stroke(!isFreeTrialEnabled ? Color.white : Color.white.opacity(0.3), lineWidth: 2)
                                         .frame(width: 24, height: 24)
                                         .overlay(
                                             Circle()
-                                                .fill(isAnnualSelected ? Color.white : Color.clear)
+                                                .fill(!isFreeTrialEnabled ? Color.white : Color.clear)
                                                 .frame(width: 16, height: 16)
                                         )
                                 }
@@ -177,23 +181,23 @@ struct PayWallView: View {
                                 )
                             }
                             
-                            // Weekly option
-                            Button(action: { isAnnualSelected = false }) {
+                            // Weekly with trial option
+                            Button(action: { isFreeTrialEnabled = true }) {
                                 HStack {
                                     VStack(alignment: .leading, spacing: 4) {
-                                        Text(hasFreeTrial ? "3-Day Free Trial" : "Weekly Premium")
+                                        Text("3-Day Free Trial")
                                             .font(.headline)
                                             .fontWeight(.bold)
                                             .foregroundColor(.white)
                                             .shadow(color: .black.opacity(0.2), radius: 2, x: 0, y: 1)
                                         
                                         HStack {
-                                            Text(hasFreeTrial ? "Try before you buy" : "Flexible weekly billing")
+                                            Text("Try before you buy")
                                                 .font(.caption)
                                                 .foregroundColor(.white.opacity(0.8))
                                         }
                                         
-                                        Text(hasFreeTrial ? "then \(weekly.localizedPriceString) per week" : "\(weekly.localizedPriceString) per week")
+                                        Text("then \(weekly.localizedPriceString) per week")
                                             .font(.subheadline)
                                             .fontWeight(.medium)
                                             .foregroundColor(.white)
@@ -202,11 +206,11 @@ struct PayWallView: View {
                                     Spacer()
                                     
                                     Circle()
-                                        .stroke(!isAnnualSelected ? Color.white : Color.white.opacity(0.3), lineWidth: 2)
+                                        .stroke(isFreeTrialEnabled ? Color.white : Color.white.opacity(0.3), lineWidth: 2)
                                         .frame(width: 24, height: 24)
                                         .overlay(
                                             Circle()
-                                                .fill(!isAnnualSelected ? Color.white : Color.clear)
+                                                .fill(isFreeTrialEnabled ? Color.white : Color.clear)
                                                 .frame(width: 16, height: 16)
                                         )
                                 }
@@ -221,9 +225,28 @@ struct PayWallView: View {
                                 )
                             }
                             
+                            // Free Trial Toggle Section
+                            VStack(alignment: .leading, spacing: 3) {
+                                
+                                Toggle("Enable 3-Day Free Trial", isOn: $isFreeTrialEnabled)
+                                    .fontWeight(.bold)
+                                    .font(.headline)
+                                    .tint(.accentColor)
+                                    .foregroundColor(.white)
+                            }
+                            .padding()
+                            .background(
+                                RoundedRectangle(cornerRadius: 16)
+                                    .fill(Color.black.opacity(0.5))
+                                    .background(
+                                        RoundedRectangle(cornerRadius: 16)
+                                            .fill(.ultraThinMaterial)
+                                    )
+                            )
+                            
                             // Purchase button
                             Button(action: {
-                                let package = isAnnualSelected ? annual : weekly
+                                let package = isFreeTrialEnabled ? weekly : annual
                                 globalViewModel.purchase(package: package)
                             }) {
                                 HStack {
@@ -233,7 +256,7 @@ struct PayWallView: View {
                                             .padding(.trailing, 8)
                                     }
                                     
-                                    Text(!isAnnualSelected && hasFreeTrial ? "Start Free Trial" : "Upgrade to Premium")
+                                    Text(isFreeTrialEnabled ? "Start Free Trial" : "Upgrade to Premium")
                                         .fontWeight(.semibold)
                                         .font(.system(.body, design: .rounded))
                                     
