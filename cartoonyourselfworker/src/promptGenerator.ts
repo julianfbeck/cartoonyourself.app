@@ -327,6 +327,49 @@ const STYLES: Record<string, StyleConfig> = {
 </prompt>
 `
   },
+  "slice-of-life-09": {
+    styleID: "slice-of-life-09",
+    name: "Anime Slice-of-Life",
+    prompt: "transform this into a warm, cozy modern anime slice-of-life style with soft colors and peaceful atmosphere. ITS IMPORTANT TO ONLY ADD CHARACTERS THAT ARE IN THE ORIGINAL IMAGE. NO COPYRIGHTED CHARACTERS!",
+    styleJson: `<prompt>
+  <style>Modern anime slice-of-life</style>
+  <characters>
+    <description>Character with warm, approachable anime aesthetic</description>
+    <features>
+      <face>Soft, rounded features with gentle jawline</face>
+      <eyes>Large, expressive brown eyes with defined eyelashes and slight shine</eyes>
+      <eyebrows>Thin, simple curved lines</eyebrows>
+      <nose>Minimalist, often just a small vertical line</nose>
+      <mouth>Simple, expressive with clean lines and warm smile</mouth>
+      <hair>Medium-length wavy brown hair with soft highlights and natural movement</hair>
+      <proportions>Slightly stylized but balanced facial proportions</proportions>
+    </features>
+    <expressions>Friendly, genuine smile with slightly open mouth</expressions>
+    <clothing>Simple, comfortable clothing like light-colored hoodies with drawstrings</clothing>
+  </characters>
+  <artStyle>
+    <technique>Digital 2D animation with clean linework</technique>
+    <colors>Warm, muted color palette with soft skin tones</colors>
+    <linework>Clean black outlines, varied thickness for depth</linework>
+    <shading>Minimal cel shading with subtle highlights</shading>
+    <lighting>Soft, warm indoor lighting with gentle highlights</lighting>
+  </artStyle>
+  <background>
+    <elements>Cozy indoor setting with bookshelves, windows, and houseplants</elements>
+    <style>Soft focus with warm colors and natural lighting</style>
+    <mood>Comfortable, inviting home environment</mood>
+    <depth>Subtle blur to create foreground/background separation</depth>
+  </background>
+  <mood>
+    <feeling>Warm, friendly, approachable</feeling>
+    <atmosphere>Everyday slice-of-life, peaceful moment</atmosphere>
+  </mood>
+  <restrictions>
+    <avoid>Adding additional Characters that are not in the original image</avoid>
+  </restrictions>
+</prompt>
+`
+  },
   // Additional styles to be added later:
   // "cyberpunk-anime-003"
   // "chibi-kawaii-004"

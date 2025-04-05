@@ -24,6 +24,7 @@ struct AnimeYourselfView: View {
     let animeStyles = [
         "3d-animation-02",
         "modern-anime-06",
+        "slice-of-life-09",
         "cartoon-03",
         "ghibli-05",
         "flat-01",

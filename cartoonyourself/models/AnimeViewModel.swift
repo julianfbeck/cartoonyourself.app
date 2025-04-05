@@ -376,7 +376,7 @@ extension UIImage {
             return self
         }
         
-        let text = "juli.sh/anify"
+        let text = "juli.sh/toonzy"
         
         // Set up graphics context with image size
         UIGraphicsBeginImageContextWithOptions(self.size, false, self.scale)

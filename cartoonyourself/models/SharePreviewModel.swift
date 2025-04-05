@@ -135,7 +135,7 @@ struct SharePreviewContent: View {
             // Watermark/Footer
             HStack {
                 Spacer()
-                Text("Created with Anify • juli.sh/anify")
+                Text("Created with Toonzy • juli.sh/toonzy")
                     .font(.system(size: 14, weight: .medium, design: .rounded))
                     .foregroundColor(.white.opacity(0.9))
             }

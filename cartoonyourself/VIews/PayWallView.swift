@@ -1,13 +1,5 @@
 //
 //  PayWallView.swift
-//  animeyourself
-//
-//  Created by Julian Beck on 31.03.25.
-//
-
-
-//
-//  PayWallView.swift
 //  watermarkremover
 //
 //  Created by Julian Beck on 23.03.25.

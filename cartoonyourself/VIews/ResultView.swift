@@ -60,7 +60,7 @@ struct ResultView: View {
                     Button {
                         if retryCount < 6 {
                             retryCount += 1
-                            
+                            self.showActionsButtons = false
                             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                                 if !globalViewModel.isPro {
                                     globalViewModel.isShowingPayWall = true
