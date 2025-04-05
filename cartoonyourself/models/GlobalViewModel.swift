@@ -36,7 +36,7 @@ class GlobalViewModel: ObservableObject {
     
     @Published var canUseForFree: Bool
     
-    private let maxUsageCount: Int = 100
+    private let maxUsageCount: Int = 2
     private let featureKey = "finalUsageCountforReal"
     
     // Track if this is the first launch

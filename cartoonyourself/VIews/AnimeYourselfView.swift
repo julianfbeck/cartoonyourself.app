@@ -18,6 +18,7 @@ struct AnimeYourselfView: View {
     @State private var showImagePicker = false
     @State private var showSuccessAlert = false
     @State private var showErrorAlert = false
+    @State private var showStylePreview = false
     
     // List of anime styles matching the IDs in the AnimeViewModel
     let animeStyles = [
@@ -46,6 +47,11 @@ struct AnimeYourselfView: View {
                         
                         // Add a programmatic navigation link
                         NavigationLink(destination: ResultView().environmentObject(model), isActive: $model.navigateToResult) {
+                            EmptyView()
+                        }
+                        
+                        // Navigation to style preview screen
+                        NavigationLink(destination: StylePreviewView(model: model), isActive: $showStylePreview) {
                             EmptyView()
                         }
                         
@@ -122,11 +128,40 @@ struct AnimeYourselfView: View {
     }
     
     private var headerView: some View {
-        Image("banner")
-            .resizable()
-            .scaledToFit()
-            .frame(maxWidth: .infinity)
-        .cornerRadius(20)
+        ZStack {
+            Image("banner")
+                .resizable()
+                .scaledToFit()
+                .frame(maxWidth: .infinity)
+                .cornerRadius(20)
+            
+            // iPad style preview button (positioned at the top right corner)
+            if UIDevice.current.userInterfaceIdiom == .pad {
+                VStack {
+                    HStack {
+                        Spacer()
+                        
+                        Button(action: {
+                            showStylePreview = true
+                        }) {
+                            Text("View All Styles")
+                                .font(.system(.subheadline, design: .rounded, weight: .medium))
+                                .foregroundColor(.white)
+                                .padding(.vertical, 8)
+                                .padding(.horizontal, 15)
+                                .background(
+                                    Capsule()
+                                        .fill(Color.accentColor)
+                                )
+                                .shadow(color: Color.black.opacity(0.3), radius: 3, x: 0, y: 2)
+                        }
+                        .padding(15)
+                    }
+                    
+                    Spacer()
+                }
+            }
+        }
     }
     
     private var imageSelectionView: some View {

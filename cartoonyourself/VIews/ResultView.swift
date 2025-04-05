@@ -7,6 +7,7 @@ struct ResultView: View {
     @Environment(\.presentationMode) private var presentationMode
     @EnvironmentObject private var model: AnimeViewModel
     @EnvironmentObject private var globalViewModel: GlobalViewModel
+    @Environment(\.requestReview) var requestReview
     
     @StateObject private var shareModel = SharePreviewModel()
     @State private var showShareSheet = false
@@ -18,6 +19,7 @@ struct ResultView: View {
     @State private var viewBounds: CGRect = .zero
     @State private var retryCount = 0
     @State private var showActionsButtons = false
+    @AppStorage("like") private var userPressedLikeButton = 0
     
     var body: some View {
         ZStack {
@@ -49,7 +51,7 @@ struct ResultView: View {
                     
                     Spacer()
                     
-                    Text("Anime Portrait")
+                    Text("Toonzy App")
                         .font(.system(.title, design: .rounded, weight: .bold))
                         .foregroundColor(.white)
                     
@@ -177,18 +179,26 @@ struct ResultView: View {
                                     .foregroundColor(.yellow)
                                     .padding(.vertical, 8)
                             }
-
+                            
                             if !showActionsButtons {
                                 // Like/Try Again buttons
                                 HStack(spacing: 15) {
                                     // Like the Design button (matched with Save button style)
                                     ActionButton(
-                                        title: "Like the Design",
+                                        title: "Like & Share",
                                         icon: "heart.fill",
                                         backgroundColor: Color.accentColor
                                     ) {
                                         withAnimation {
                                             showActionsButtons = true
+                                            self.userPressedLikeButton += 1
+                                            
+                                            if userPressedLikeButton == 2 || userPressedLikeButton == 12 {
+                                                DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                                                    requestReview()
+                                                }
+                                            }
+                                            
                                         }
                                         // Give haptic feedback
                                         let generator = UIImpactFeedbackGenerator(style: .medium)
@@ -197,7 +207,7 @@ struct ResultView: View {
                                     
                                     // Try Again button (matched with Share button style)
                                     ActionButton(
-                                        title: "Free Retry (\(6 - retryCount) left)",
+                                        title: "Free Retry",
                                         icon: "arrow.clockwise",
                                         backgroundColor: Color.black.opacity(0.4),
                                         action: {
@@ -335,7 +345,7 @@ struct ResultView: View {
                                 .padding(.vertical, 16)
                                 .background(
                                     RoundedRectangle(cornerRadius: 25)
-                                        .fill(Color.red.opacity(0.7))
+                                        .fill(Color.black.opacity(0.4))
                                         .overlay(
                                             RoundedRectangle(cornerRadius: 25)
                                                 .stroke(Color.white.opacity(0.3), lineWidth: 1)
@@ -361,7 +371,7 @@ struct ResultView: View {
                                         .frame(maxWidth: UIScreen.main.bounds.width * 0.8)
                                         .frame(maxHeight: UIScreen.main.bounds.height * 0.5)
                                 }
-
+                                
                                 VStack(spacing: 16) {
                                     Image(systemName: "exclamationmark.circle.fill")
                                         .font(.system(size: 40))

@@ -23,7 +23,7 @@ class AnimeViewModel: ObservableObject {
     @Published var showResultView = false
     @Published var showConfetti = false
     @Published var navigateToResult = false
-    @Published var selectedStyle: String = "anime-default-001"
+    @Published var selectedStyle: String = "3d-animation-02"
     @Published var processingStatus: String = "queued"
     @Published var requestId: String?
     
