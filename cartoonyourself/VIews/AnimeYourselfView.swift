@@ -442,7 +442,7 @@ struct AnimeYourselfView: View {
                     .frame(width: 120, height: 130)
                     .overlay(
                         RoundedRectangle(cornerRadius: 12)
-                            .stroke(model.selectedStyle == style ? Color.accentColor : Color.red.opacity(0.2), lineWidth: 2.5)
+                            .stroke(model.selectedStyle == style ? Color.accentColor : Color.red.opacity(0.2), lineWidth: style == model.selectedStyle ? 3 : 1)
                     )
                     .shadow(radius: model.selectedStyle == style ? 5 : 0)
             }
