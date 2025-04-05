@@ -329,55 +329,44 @@ const STYLES: Record<string, StyleConfig> = {
   },
   "slice-of-life-09": {
     styleID: "slice-of-life-09",
-    name: "Anime Slice-of-Life",
-    prompt: "transform this into a warm, cozy modern anime slice-of-life style with soft colors and peaceful atmosphere. ITS IMPORTANT TO ONLY ADD CHARACTERS THAT ARE IN THE ORIGINAL IMAGE. NO COPYRIGHTED CHARACTERS!",
+    name: "Warm Slice-of-Life",
+    prompt: "transform this into a warm, welcoming anime-cartoon style with clean lines, soft colors and a cozy atmosphere. ITS IMPORTANT TO ONLY ADD CHARACTERS THAT ARE IN THE ORIGINAL IMAGE. NO COPYRIGHTED CHARACTERS!",
     styleJson: `<prompt>
-  <style>Warm Anime-Influenced Illustration</style>
+  <style>Warm Slice-of-Life Illustration</style>
   <characters>
-    <description>Character with soft, welcoming appearance in gentle anime style</description>
+    <description>Character with warm, welcoming appearance in gentle anime-cartoon hybrid style</description>
     <features>
-      <face>Heart-shaped with smooth jawline and soft chin</face>
-      <eyes>Large, expressive almond-shaped eyes with distinct eyelashes and subtle highlights</eyes>
-      <eyebrows>Thin, delicate lines with minimal detail</eyebrows>
-      <nose>Minimalist, represented by a simple short line</nose>
-      <mouth>Simple, cheerful with clearly defined upper lip when smiling</mouth>
-      <hair>Flowing, wavy medium-length hair with subtle highlights and layered appearance</hair>
-      <ears>Simple curved shapes with minimal detail</ears>
-      <skin>Warm-toned with subtle blush and minimal shading</skin>
+      <face>Heart-shaped with soft jawline and cheerful expression</face>
+      <eyes>Large, expressive oval eyes with defined eyelashes and subtle highlights</eyes>
+      <eyebrows>Thin, simple curved lines</eyebrows>
+      <nose>Simple small line or subtle triangle</nose>
+      <mouth>Clean-lined, cheerful open smile with visible teeth</mouth>
+      <hair>Flowing, wavy with defined sections and subtle highlights</hair>
+      <skin>Warm peachy tone with minimal shading</skin>
     </features>
-    <expressions>Friendly, approachable smile with slightly open mouth</expressions>
+    <expressions>Friendly, genuine smile with slightly open mouth</expressions>
     <clothing>Simple, comfortable hoodie with drawstrings and minimal detail</clothing>
   </characters>
   <artStyle>
-    <technique>Digital illustration with clean linework and flat coloring</technique>
+    <technique>Digital animation with clean, precise linework</technique>
     <colors>
-      <palette>Warm earth tones: beiges, browns, soft greens, and muted yellows</palette>
-      <character>Medium brown hair, peachy skin tone, cream/off-white clothing</character>
-      <background>Warm amber tones with accents of sage green</background>
+      <palette>Warm amber and honey tones with soft greens and cream accents</palette>
+      <character>Medium brown hair, warm peachy skin, cream/off-white clothing</character>
+      <background>Warm golden tones with soft focus and minimal details</background>
     </colors>
-    <linework>Clean black outlines of consistent medium thickness</linework>
-    <shading>Minimal cell shading with soft highlights in hair</shading>
+    <linework>Clean black outlines with consistent medium thickness</linework>
+    <shading>Minimal, subtle cell shading with soft highlights</shading>
     <lighting>Warm, diffused indoor lighting creating a cozy atmosphere</lighting>
-    <style>Blend of anime simplicity with slice-of-life softness</style>
+    <style>Clean, appealing anime-influenced cartoon style</style>
   </artStyle>
-  <background>
-    <setting>Cozy interior space with bookshelves and windows</setting>
-    <elements>
-      <bookshelf>Soft-focused wooden bookshelf with simplified book shapes</bookshelf>
-      <window>Large window letting in warm light</window>
-      <plants>Simple houseplant with minimal detail</plants>
-    </elements>
-    <focus>Slightly blurred to emphasize character in foreground</focus>
-    <perspective>Flat, straightforward with minimal depth cues</perspective>
-  </background>
   <composition>
-    <framing>Centered portrait/bust shot from shoulders up</framing>
-    <depth>Character in sharp focus, background slightly defocused</depth>
-    <proportions>Slightly stylized with larger eyes and simplified features</proportions>
+    <framing>Centered character with balanced background elements</framing>
+    <depth>Character in sharp focus, background softly blurred</depth>
+    <proportions>Slightly stylized with balanced facial proportions</proportions>
   </composition>
   <mood>
-    <feeling>Warm, inviting, cheerful, approachable</feeling>
-    <atmosphere>Homey, comfortable, peaceful slice-of-life</atmosphere>
+    <feeling>Warm, welcoming, cheerful, approachable</feeling>
+    <atmosphere>Cozy, peaceful, comfortable home environment</atmosphere>
   </mood>
   <restrictions>
     <avoid>Adding additional Characters that are not in the original image</avoid>
