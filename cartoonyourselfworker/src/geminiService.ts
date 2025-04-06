@@ -148,7 +148,8 @@ To ensure we do not replicate this photo describe the people in this image as we
 			}
 		};
 
-		const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp-image-generation:generateContent?key=${this.apiKey}`;
+		const apiUrl = `https://gemini-proxy-9wtm.onrender.com/api/gemini/generate-image`;
+		// const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp-image-generation:generateContent?key=${this.apiKey}`;
 
 		const response = await fetch(apiUrl, {
 			method: 'POST',
