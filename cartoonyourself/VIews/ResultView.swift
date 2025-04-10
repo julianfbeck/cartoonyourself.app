@@ -38,6 +38,19 @@ struct ResultView: View {
             )
             .ignoresSafeArea()
             
+            // Blurred background when processing
+            if model.isProcessing, let originalImage = model.selectedImage {
+                Image(uiImage: originalImage)
+                    .resizable()
+                    .scaledToFill()
+                    .blur(radius: 20)
+                    .scaleEffect(1.5)
+                    .opacity(0.8)
+                    .brightness(-0.1)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .edgesIgnoringSafeArea(.all)
+            }
+            
             VStack(spacing: 20) {
                 // Header
                 HStack {
@@ -92,6 +105,8 @@ struct ResultView: View {
                             if let originalImage = model.selectedImage {
                                 // Show ripple effect on original image during processing
                                 ZStack {
+                                    // Remove the blurred background image from here
+                                    
                                     Image(uiImage: originalImage)
                                         .resizable()
                                         .scaledToFit()
@@ -148,11 +163,7 @@ struct ResultView: View {
                                     .shadow(radius: 10)
                                     .frame(maxWidth: 280)
                                 }
-                                .overlay(
-                                    RoundedRectangle(cornerRadius: 16)
-                                        .stroke(Color.white.opacity(0.2), lineWidth: 1.5)
-                                )
-                                .frame(width: UIScreen.main.bounds.width * 0.8) // Set width to 80% of screen width
+                                .frame(maxWidth: .infinity) // Use full width instead of 80%
                                 .frame(maxHeight: UIScreen.main.bounds.height * 0.7)
                                 .preferredColorScheme(.dark)
                                 
