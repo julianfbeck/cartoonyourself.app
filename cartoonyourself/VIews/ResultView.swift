@@ -19,6 +19,9 @@ struct ResultView: View {
     @State private var viewBounds: CGRect = .zero
     @State private var retryCount = 0
     @State private var showActionsButtons = false
+    @State private var queueCountdown = 7
+    @State private var queueTimer: Timer? = nil
+    @State private var showQueueCountdown = false
     @AppStorage("like") private var userPressedLikeButton = 0
     
     var body: some View {
@@ -51,7 +54,7 @@ struct ResultView: View {
                     
                     Spacer()
                     
-                    Text("Toonzy App")
+                    Text("Toonshift")
                         .font(.system(.title, design: .rounded, weight: .bold))
                         .foregroundColor(.white)
                     
@@ -101,6 +104,11 @@ struct ResultView: View {
                                                     // Store bounds for random ripple generation
                                                     viewBounds = geometry.frame(in: .local)
                                                     startRippleEffect()
+                                                    
+                                                    // Start queue countdown for non-pro users
+                                                    if !globalViewModel.isPro {
+                                                        startQueueCountdown()
+                                                    }
                                                 }
                                         })
                                     
@@ -114,6 +122,25 @@ struct ResultView: View {
                                             .font(.system(.headline, design: .rounded))
                                             .foregroundColor(.white)
                                             .padding(.top, 20)
+                                        
+                                        // Queue countdown for non-pro users - no longer dependent on processingStatus
+                                        if !globalViewModel.isPro && showQueueCountdown {
+                                            HStack(spacing: 4) {
+                                                Text("Wait time:")
+                                                    .font(.system(.subheadline, design: .rounded))
+                                                    .foregroundColor(.white.opacity(0.8))
+                                                
+                                                Text("\(queueCountdown)s")
+                                                    .font(.system(.subheadline, design: .rounded, weight: .bold))
+                                                    .foregroundColor(.yellow)
+                                            }
+                                            .padding(.top, 8)
+                                            
+                                            Text("Pro users get priority processing")
+                                                .font(.system(.caption, design: .rounded, weight: .medium))
+                                                .foregroundColor(.yellow)
+                                                .padding(.top, 4)
+                                        }
                                     }
                                     .padding(30)
                                     .background(.ultraThinMaterial)
@@ -214,9 +241,18 @@ struct ResultView: View {
                                         action: {
                                             if retryCount < 6 {
                                                 retryCount += 1
+                                                     DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                                if !globalViewModel.isPro {
+                                    globalViewModel.isShowingPayWall = true
+                                }
+                            }
                                                 
                                                 Plausible.shared.trackPageview(path: "/retry")
                                                 if let image = model.selectedImage {
+                                                    // Start the countdown again for non-pro users on retry
+                                                    if !globalViewModel.isPro {
+                                                        startQueueCountdown()
+                                                    }
                                                     model.processImage(image, style: model.selectedStyle)
                                                 }
                                                 
@@ -405,6 +441,10 @@ struct ResultView: View {
                                             }
                                             
                                             if let image = model.selectedImage {
+                                                // Start the countdown again for non-pro users on retry
+                                                if !globalViewModel.isPro {
+                                                    startQueueCountdown()
+                                                }
                                                 model.processImage(image, style: model.selectedStyle)
                                             }
                                         }
@@ -498,6 +538,31 @@ struct ResultView: View {
             // Clean up the timer when view disappears
             timer?.invalidate()
             timer = nil
+            queueTimer?.invalidate()
+            queueTimer = nil
+        }
+    }
+    
+    // Function to start the queue countdown for non-pro users
+    private func startQueueCountdown() {
+        // Reset countdown to 7
+        queueCountdown = 7
+        showQueueCountdown = true
+        
+        // Cancel any existing timer
+        queueTimer?.invalidate()
+        
+        // Create a timer that counts down every second
+        queueTimer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { timer in
+            if queueCountdown > 0 {
+                queueCountdown -= 1
+            } else {
+                // Keep the queue countdown visible for a short time after reaching zero
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                    showQueueCountdown = false
+                }
+                timer.invalidate()
+            }
         }
     }
     

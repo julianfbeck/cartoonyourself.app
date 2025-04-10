@@ -102,7 +102,7 @@ struct SharePreviewContent: View {
                 }
                 
                 VStack(alignment: .leading) {
-                    Text("Toonzy")
+                    Text("Toonshift")
                         .font(.system(size: 28, weight: .bold, design: .rounded))
                         .foregroundColor(.white)
                     
@@ -135,7 +135,7 @@ struct SharePreviewContent: View {
             // Watermark/Footer
             HStack {
                 Spacer()
-                Text("Created with Toonzy • juli.sh/toonzy")
+                Text("Created with Toonshift • juli.sh/Toonshift")
                     .font(.system(size: 14, weight: .medium, design: .rounded))
                     .foregroundColor(.white.opacity(0.9))
             }

@@ -26,7 +26,7 @@ struct FirstOnboardingScreen: View {
         VStack(spacing: 24) {
             // App logo and title
             VStack(spacing: 16) {
-                Text("Toonzy")
+                Text("Toonshift")
                     .font(.system(size: 42, weight: .bold))
                 
                 Text("Transform Yourself Into Cartoon")
